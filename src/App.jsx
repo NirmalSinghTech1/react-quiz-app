@@ -26,13 +26,13 @@ function App() {
 
   function handleAddAnswer(answer) {
     setAnswerStatus({ answer: answer, status: "answered" });
+    const isCorrect = QUESTIONS[activeQuestionIndex].answers[0] === answer;
 
     setTimeout(() => {
-      if (QUESTIONS[activeQuestionIndex].answers[0] === answer) {
-        setAnswerStatus((prevStatus) => ({ ...prevStatus, status: "correct" }));
-      } else {
-        setAnswerStatus((prevStatus) => ({ ...prevStatus, status: "wrong" }));
-      }
+      setAnswerStatus((prevStatus) => ({
+        ...prevStatus,
+        status: isCorrect ? "correct" : "wrong",
+      }));
 
       setTimeout(() => {
         setAnswers((prevAnswers) => [...prevAnswers, answer]);
@@ -58,7 +58,7 @@ function App() {
             />
           </div>
         ) : (
-          <Scoreboard />
+          <Scoreboard answers={answers} />
         )}
       </main>
     </>
