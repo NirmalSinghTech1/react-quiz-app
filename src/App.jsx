@@ -44,22 +44,24 @@ function App() {
   return (
     <>
       <main className="w-full">
-        {!quizIsComplete ? (
-          <div className="bg-linear-to-b from-gray-800 to-gray-950 mx-3 rounded-xl px-3 pb-10 h-100 shadow-[0_3px_10px_1px_rgba(0,0,0,0.5)] animate-[slideUp_0.6s_ease-in-out_1] md:p-11 md:h-auto md:mx-auto max-w-[49em]">
-            <ProgressBar
-              onSkipAnswer={!answerStatus.answer ? handleSkipAnswer : null}
-              timeout={timer}
-              key={answerStatus.status ? timer : activeQuestionIndex}
-            />
-            <Question
-              onAddAnswer={handleAddAnswer}
-              activeQuestionIndex={activeQuestionIndex}
-              answerStatus={answerStatus}
-            />
-          </div>
-        ) : (
+        <div className="mt-6">
+          {!quizIsComplete ? (
+            <div className="bg-linear-to-b from-gray-800 to-gray-950 mx-3 rounded-xl px-3 pb-10 shadow-[0_3px_10px_1px_rgba(0,0,0,0.5)] animate-[slideUp_0.6s_ease-in-out_1] md:p-11 md:h-auto md:mx-auto max-w-[49em]">
+              <ProgressBar
+                onSkipAnswer={!answerStatus.answer ? handleSkipAnswer : null}
+                timeout={timer}
+                key={answerStatus.status ? timer : activeQuestionIndex}
+              />
+              <Question
+                onAddAnswer={handleAddAnswer}
+                activeQuestionIndex={activeQuestionIndex}
+                answerStatus={answerStatus}
+              />
+            </div>
+          ) : (
           <Scoreboard answers={answers} />
-        )}
+          )}
+        </div>
       </main>
     </>
   );
